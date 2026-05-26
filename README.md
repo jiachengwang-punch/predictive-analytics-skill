@@ -62,6 +62,12 @@ Both entry points carry a highest-priority instruction: **detect the language of
 
 ## Installation & usage
 
+Repository: <https://github.com/jiachengwang-punch/structured-data-analysis-skill>
+
+```bash
+git clone https://github.com/jiachengwang-punch/structured-data-analysis-skill.git
+```
+
 ### For Claude
 
 **Option A — install as a Skill (recommended):** package the folder into a `.skill` file and install it via Claude's skill settings. Once installed, it triggers automatically when you ask to analyze a dataset or build a model.
