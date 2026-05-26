@@ -1,5 +1,11 @@
 # Structured Data Analysis Skill
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/jiachengwang-punch/structured-data-analysis-skill)](https://github.com/jiachengwang-punch/structured-data-analysis-skill/releases)
+![Claude Skill](https://img.shields.io/badge/Claude-Skill-8A2BE2)
+![Multi-model](https://img.shields.io/badge/LLM-multi--model-blue)
+![Language-adaptive](https://img.shields.io/badge/output-language--adaptive-green)
+
 A complete, reusable, **multi-model** and **language-adaptive** methodology for end-to-end machine learning analysis of structured (tabular) data — from raw data to a validated, interpretable predictive model and an honest, decision-oriented report.
 
 The methodology is **domain-agnostic**: it works for customer churn, sales/demand forecasting, risk/default prediction, site selection, sensor/monitoring data, and any other "I have a dataset and want to predict or understand Y" task. A city-noise dataset is used as the running example throughout the guides.
