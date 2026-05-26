@@ -1,7 +1,7 @@
-# Structured Data Analysis Skill
+# Predictive Analytics Skill
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/jiachengwang-punch/structured-data-analysis-skill)](https://github.com/jiachengwang-punch/structured-data-analysis-skill/releases)
+[![Release](https://img.shields.io/github/v/release/jiachengwang-punch/predictive-analytics-skill)](https://github.com/jiachengwang-punch/predictive-analytics-skill/releases)
 ![Claude Skill](https://img.shields.io/badge/Claude-Skill-8A2BE2)
 ![Multi-model](https://img.shields.io/badge/LLM-multi--model-blue)
 ![Language-adaptive](https://img.shields.io/badge/output-language--adaptive-green)
@@ -62,10 +62,10 @@ Both entry points carry a highest-priority instruction: **detect the language of
 
 ## Installation & usage
 
-Repository: <https://github.com/jiachengwang-punch/structured-data-analysis-skill>
+Repository: <https://github.com/jiachengwang-punch/predictive-analytics-skill>
 
 ```bash
-git clone https://github.com/jiachengwang-punch/structured-data-analysis-skill.git
+git clone https://github.com/jiachengwang-punch/predictive-analytics-skill.git
 ```
 
 ### For Claude
@@ -81,7 +81,7 @@ Open `METHODOLOGY.md`, copy its entire contents, and paste it into the model as 
 ## Repository structure
 
 ```
-structured-data-analysis-skill/
+predictive-analytics-skill/
 ├── SKILL.md              # Claude entry point (YAML header)
 ├── METHODOLOGY.md        # Plain-prompt entry point (other LLMs)
 ├── references/           # Shared platform-neutral core (7 guides)

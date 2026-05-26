@@ -1,10 +1,10 @@
 ---
-name: structured-data-analysis
+name: predictive-analytics
 description: >
   A complete, reusable methodology for end-to-end machine learning analysis of structured (tabular) data — data import and cleaning, exploratory analysis, feature engineering, classification/regression modeling, model diagnosis, clustering, interpretability, and final reporting. Use this skill WHENEVER the user wants to analyze a tabular dataset (CSV/Excel), build a predictive model (classification or regression), do EDA, engineer features, evaluate or diagnose a model, cluster/segment records, or produce a data-analysis report or thesis — even if they ask for just one piece (e.g. "build a churn model", "do EDA on this CSV", "what features should I use", "cluster my stores"). Trigger for any "I have a dataset and want to predict/understand Y" task: customer churn, sales/demand forecasting, risk/default prediction, site selection, sensor/monitoring data, and similar. Domain-agnostic; a city-noise dataset is the running example.
 ---
 
-# 结构化数据分析方法论 / Structured Data Analysis Methodology
+# 预测分析方法论 / Predictive Analytics Methodology
 
 > A platform-neutral, language-adaptive methodology for taking any structured (tabular) dataset through a rigorous, complete machine-learning analysis. Suitable for coursework, theses, and real business analysis.
 

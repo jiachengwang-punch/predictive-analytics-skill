@@ -1,4 +1,4 @@
-# 结构化数据分析方法论 — 通用大模型提示词版 / Structured Data Analysis Methodology — Plain-Prompt Edition
+# 预测分析方法论 — 通用大模型提示词版 / Predictive Analytics Methodology — Plain-Prompt Edition
 
 > **这是什么 / What this is**
 > 一套完整、可复用、跨模型、跨语言的结构化（表格）数据机器学习分析方法论。本文件是「纯提示词版」，可直接复制粘贴给任意大语言模型（ChatGPT、Gemini、DeepSeek、Qwen、Kimi，或任何通过 API 调用的模型）作为系统提示或对话开头使用。

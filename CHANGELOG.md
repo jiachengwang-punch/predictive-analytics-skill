@@ -7,7 +7,7 @@ semantic versioning.
 ## [1.0.0] - 2026-05-26
 
 ### Added
-- Initial release of the Structured Data Analysis Skill.
+- Initial release of the Predictive Analytics Skill.
 - Dual-format architecture: `SKILL.md` (Claude entry point with YAML header) and `METHODOLOGY.md` (plain-prompt entry point for other LLMs), sharing a common `references/` core.
 - Language-adaptive output: the analysis is produced in whatever language the user asks in.
 - Seven platform-neutral deep-dive guides covering the full workflow:
