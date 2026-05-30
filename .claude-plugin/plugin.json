@@ -1,6 +1,6 @@
 {
   "name": "predictive-analytics",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "End-to-end machine-learning methodology for structured (tabular) data — import, EDA, feature engineering, classification/regression, diagnosis, clustering, interpretability, reporting — plus a 4-agent ensemble (methodology-architect, model-diagnostician, tool-scout, professor-reviewer) for more comprehensive, rigor-checked analysis. Multi-model and language-adaptive.",
   "author": {
     "name": "jiachengwang-punch",

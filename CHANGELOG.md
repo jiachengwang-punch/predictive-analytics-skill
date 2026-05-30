@@ -4,6 +4,11 @@ All notable changes to this skill are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 semantic versioning.
 
+## [2.0.1] - 2026-05-30
+
+### Changed
+- `model-diagnostician`: reordered the leakage-recheck signals by reliability after an end-to-end validation run on the Telco Churn dataset — (1) anomalous score jump, (2) feature-vs-label consistency check (>95% ⇒ leakage), (3) importance via **gain/SHAP, not split-count**. Documented that a binary leakage feature can be buried under continuous features in default split-count importance, so split-count is unreliable for leakage detection. Updated both the portable role-prompt and the plugin wrapper.
+
 ## [2.0.0] - 2026-05-30
 
 ### Added
