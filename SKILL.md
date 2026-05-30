@@ -21,7 +21,7 @@ A complete analysis pipeline that turns raw tabular data into an interpretable, 
 Work through these stages in order. Each has a dedicated deep-dive guide in `references/`. Read the relevant guide before executing that stage — the guides contain the concrete techniques, code patterns, and the *reasoning* behind each choice.
 
 1. **Data import & cleaning** → `references/01_data_import_cleaning.md`
-   Load data; understand every field; check missing/duplicate/anomalies; **detect data leakage** (the single most important step for trustworthy models); fix time/type issues.
+   Load data; understand every field; check missing/duplicate/anomalies; **screen for data leakage proportional to risk** (always ask the question; investigate deeply when provenance is risky); fix time/type issues.
 
 2. **Exploratory data analysis (EDA)** → `references/02_eda.md`
    Understand what drives the target before modeling: distributions, group comparisons, correlations, time/space/category patterns. Produces the charts that tell the data's story.
@@ -45,7 +45,7 @@ Work through these stages in order. Each has a dedicated deep-dive guide in `ref
 
 These apply at every stage and are what separate a rigorous analysis from "just running a model":
 
-- **Detect leakage first.** Always ask of every feature: "Is this truly available at prediction time, or is it a result/consequence of the target?" A feature that is a downstream effect of the label inflates scores but destroys real predictive value. This check is non-negotiable.
+- **Screen for leakage, proportional to risk.** Always ask of every feature: "Is this truly available at prediction time, or is it a result/consequence of the target?" A feature that is a downstream effect of the label inflates scores but destroys real predictive value. The *screening question* is near-zero-cost and always worth asking — but how hard you investigate should scale with data provenance: temporal prediction, target-derived features, multi-table joins, or full-data encoding/scaling are high-risk and warrant deep checks; clean cross-sectional data with clearly exogenous features (a curated benchmark, independent sensor readings) is low-risk — confirm and move on rather than manufacturing a leakage hunt. This is "match method to constraint" applied to QC.
 - **Honest reporting over a pretty number.** Report negative results, expose where the model fails (residual diagnosis), state limitations. A model with R²=0.97 that systematically under-predicts the extreme cases can be worse in practice than its score suggests.
 - **Always compare against a baseline.** A complex model must beat a simple one (logistic/linear regression, or "predict the mean") to justify itself.
 - **Match method to constraint.** Sample size, data type, and interpretability needs drive method choice — not fashion. Large tabular data → gradient-boosted trees usually win; tiny samples → simple regularized linear models; non-tabular (images/text) → deep learning. Don't apply small-sample tactics (heavy regularization, LOOCV) to big data, or vice versa.
@@ -55,6 +55,19 @@ These apply at every stage and are what separate a rigorous analysis from "just 
 ## How to use the references
 
 Each reference is self-contained and platform-neutral. Read the guide for the stage you're working on; it explains *why* each step matters (theory of mind), gives concrete code patterns (Python: pandas, scikit-learn, lightgbm, shap, matplotlib), and shows how to interpret outputs. Adapt all examples to the user's actual dataset and language.
+
+## Agent ensemble (for more comprehensive analysis)
+
+Four specialized agents add independent, often adversarial perspectives so the analysis is thought through from more angles than a single linear pass. Each has a portable role-prompt in `references/agents/` (the single source of truth, usable in any LLM) and, for Claude Code, a thin plugin wrapper in `agents/` that points to it. Dispatch them via the Task tool at the right moment — they are optional reinforcements, not required steps.
+
+| Agent | When to dispatch | What it does |
+|-------|------------------|--------------|
+| **methodology-architect** | Before modeling (before stage 4) | Produces an analysis blueprint: task type, method tier by sample-size/feature constraint, split & validation strategy, leakage-risk list. |
+| **model-diagnostician** | After a model scores well (after stage 5) | Adversarially hunts for failure: residual structure, subgroup performance, calibration, error clusters, suspiciously-high-score leakage suspicion. |
+| **tool-scout** | When tool/model choice is uncertain | **Searches the web** to verify whether a better-fitting library/model exists for this scenario — LightGBM is the default, not automatically the best. Returns scenario-based recommendations + sources; degrades to a knowledge-based (clearly-flagged) recommendation when offline. |
+| **professor-reviewer** | Before final delivery | Reviews the whole deliverable as a university data-analysis professor: grade + commentary; methodology flaws (leakage, no baseline, wrong metric) get sent back with a concrete remediation checklist. Does **not** auto-rerun — the main flow decides whether to iterate, then can re-review until it passes. |
+
+A natural rigorous loop: **methodology-architect** (plan) → run stages 1–7 → **model-diagnostician** (find flaws) → revise if needed → **professor-reviewer** (final gate) → iterate until deliverable-quality. Call **tool-scout** whenever selection is in doubt. For other LLMs without subagents, paste the relevant `references/agents/*.md` as a role prompt to get the same perspective.
 
 ## Output & deliverables
 

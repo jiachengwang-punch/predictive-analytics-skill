@@ -4,6 +4,23 @@ All notable changes to this skill are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 semantic versioning.
 
+## [2.0.0] - 2026-05-30
+
+### Added
+- 4-agent ensemble for more comprehensive, rigor-checked analysis:
+  - `methodology-architect` — pre-modeling analysis blueprint (task type, method tier, validation plan, leakage-risk list).
+  - `model-diagnostician` — adversarial post-evaluation failure hunting (residuals, subgroup performance, calibration, leakage suspicion).
+  - `tool-scout` — web-search-backed library/model recommendation (LightGBM is the default, not automatically the best); degrades to a clearly-flagged offline recommendation.
+  - `professor-reviewer` — professor-perspective final-delivery review with grade + remediation checklist; does not auto-rerun.
+- Portable agent role-prompts in `references/agents/` (single source of truth, usable in any LLM) and Claude plugin wrappers in `agents/` that point to them.
+- `.claude-plugin/plugin.json` so the repository can be used as a Claude Code plugin (agents available natively).
+- Agent-ensemble sections in `SKILL.md`, `METHODOLOGY.md`, and `README.md`.
+- `methodology-architect`: explicit deep-learning guidance — DL is a must-be-justified candidate on tabular data (GBDT usually wins), with signals for when it's worth considering and routing for non-tabular data.
+- `model-diagnostician`: explicit overfitting check (train-vs-test gap, distinguished from leakage) and a note that diagnostics are model-family-agnostic (apply to DL too).
+
+### Changed
+- Reframed data-leakage detection from an absolute, always-mandatory step to **risk-proportional screening**: the screening question is always asked (near-zero cost), but investigation depth scales with data provenance (high-risk: temporal prediction, target-derived features, multi-table joins, full-data encoding/scaling — low-risk: clean cross-sectional data with exogenous features). Updated `references/01`, `references/03`, `SKILL.md`, `METHODOLOGY.md`, `README.md`, and the `methodology-architect` / `professor-reviewer` agents accordingly, aligning leakage QC with the existing "match method to constraint" principle.
+
 ## [1.1.0] - 2026-05-26
 
 ### Changed

@@ -1,0 +1,23 @@
+{
+  "name": "predictive-analytics",
+  "version": "2.0.0",
+  "description": "End-to-end machine-learning methodology for structured (tabular) data — import, EDA, feature engineering, classification/regression, diagnosis, clustering, interpretability, reporting — plus a 4-agent ensemble (methodology-architect, model-diagnostician, tool-scout, professor-reviewer) for more comprehensive, rigor-checked analysis. Multi-model and language-adaptive.",
+  "author": {
+    "name": "jiachengwang-punch",
+    "url": "https://github.com/jiachengwang-punch"
+  },
+  "homepage": "https://github.com/jiachengwang-punch/predictive-analytics-skill",
+  "repository": "https://github.com/jiachengwang-punch/predictive-analytics-skill",
+  "license": "MIT",
+  "keywords": [
+    "predictive-analytics",
+    "machine-learning",
+    "tabular-data",
+    "data-leakage",
+    "feature-engineering",
+    "model-diagnosis",
+    "clustering",
+    "interpretability",
+    "multi-model"
+  ]
+}

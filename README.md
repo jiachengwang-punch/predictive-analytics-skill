@@ -60,6 +60,19 @@ Both entry points carry a highest-priority instruction: **detect the language of
 | 6. Clustering | `references/06_clustering.md` | Profile aggregation, KMeans, **PCA for honest high-dim visualization** |
 | 7. Interpretability & output | `references/07_interpretability_output.md` | Feature importance, SHAP, honest model math, report composition |
 
+## Agent ensemble
+
+Beyond the linear 7-stage pipeline, the skill ships a **4-agent ensemble** that adds independent, often adversarial perspectives so an analysis gets thought through from more angles. Each agent has a portable role-prompt in `references/agents/` (the single source of truth — paste into any LLM) and, for Claude Code, a thin plugin wrapper in `agents/` that points to it.
+
+| Agent | When | What it does |
+|-------|------|--------------|
+| **methodology-architect** | Before modeling | Analysis blueprint: task type, method tier by sample/feature constraints, split & validation plan, leakage-risk list |
+| **model-diagnostician** | After a good score | Adversarially hunts failure: residual structure, subgroup performance, calibration, leakage suspicion |
+| **tool-scout** | When selection is uncertain | **Searches the web** for a better-fitting library/model — LightGBM is the default, not automatically best; flags clearly when offline |
+| **professor-reviewer** | Before delivery | Professor-perspective review + grade; sends methodology flaws back with a remediation checklist (does not auto-rerun) |
+
+A rigorous loop: architect (plan) → stages 1–7 → diagnostician (find flaws) → revise → professor-reviewer (final gate) → iterate; call tool-scout whenever model choice is in doubt. In Claude Code, install the repo as a plugin to use the agents natively; in any other LLM, paste the matching `references/agents/*.md` as a role prompt.
+
 ## Installation & usage
 
 Repository: <https://github.com/jiachengwang-punch/predictive-analytics-skill>
@@ -82,9 +95,21 @@ Open `METHODOLOGY.md`, copy its entire contents, and paste it into the model as 
 
 ```
 predictive-analytics-skill/
+├── .claude-plugin/
+│   └── plugin.json       # Plugin manifest (use the repo as a Claude Code plugin)
 ├── SKILL.md              # Claude entry point (YAML header)
 ├── METHODOLOGY.md        # Plain-prompt entry point (other LLMs)
-├── references/           # Shared platform-neutral core (7 guides)
+├── agents/               # Claude plugin agent wrappers (point to references/agents/)
+│   ├── methodology-architect.md
+│   ├── model-diagnostician.md
+│   ├── tool-scout.md
+│   └── professor-reviewer.md
+├── references/           # Shared platform-neutral core
+│   ├── agents/           # Portable agent role-prompts (single source of truth)
+│   │   ├── methodology-architect.md
+│   │   ├── model-diagnostician.md
+│   │   ├── tool-scout.md
+│   │   └── professor-reviewer.md
 │   ├── 01_data_import_cleaning.md
 │   ├── 02_eda.md
 │   ├── 03_feature_engineering.md
@@ -103,7 +128,7 @@ predictive-analytics-skill/
 
 These apply at every stage and are the heart of the methodology:
 
-- **Detect leakage first.** For every feature, ask: "Is this truly available at prediction time, or is it a downstream result of the target?" Leakage inflates scores but destroys real predictive value.
+- **Screen for leakage, proportional to risk.** For every feature, ask: "Is this truly available at prediction time, or is it a downstream result of the target?" Leakage inflates scores but destroys real predictive value. The screening question is always worth asking; how hard you investigate scales with data provenance (high-risk: temporal prediction, target-derived features, multi-table joins, full-data encoding — low-risk: clean cross-sectional data with exogenous features).
 - **Honesty over a pretty number.** Report negative results, expose where the model fails, state limitations.
 - **Always compare against a baseline.** A complex model must beat a simple one to justify itself.
 - **Match method to constraint.** Sample size, data type, and interpretability needs drive method choice — not fashion.
