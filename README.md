@@ -73,6 +73,8 @@ Beyond the linear 7-stage pipeline, the skill ships a **4-agent ensemble** that 
 
 A rigorous loop: architect (plan) → stages 1–7 → diagnostician (find flaws) → revise → professor-reviewer (final gate) → iterate; call tool-scout whenever model choice is in doubt. In Claude Code, install the repo as a plugin to use the agents natively; in any other LLM, paste the matching `references/agents/*.md` as a role prompt.
 
+> **tool-scout in practice — when to reach for CatBoost.** LightGBM is the workhorse default, but on **categorical-heavy data** (many high-cardinality categorical columns, few numeric features), **CatBoost** is often the better fit: it handles categoricals natively (no manual one-hot) and uses ordered target encoding that guards against target leakage, frequently edging out LightGBM on such datasets at the cost of slower training. Reach for it for churn / recommendation / transaction-style tables dominated by categorical fields; stick with LightGBM when data is large and mostly numeric or training speed matters. When in doubt, dispatch tool-scout to verify the current best fit for your specific data.
+
 ## Installation & usage
 
 Repository: <https://github.com/jiachengwang-punch/predictive-analytics-skill>
