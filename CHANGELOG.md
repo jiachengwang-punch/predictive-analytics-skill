@@ -4,7 +4,7 @@ All notable changes to this skill are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 semantic versioning.
 
-## [Unreleased]
+## [2.0.2] - 2026-05-30
 
 ### Changed
 - README: added CatBoost selection guidance to the agent-ensemble section (tool-scout's practical recommendation from the Telco Churn validation run) — prefer CatBoost on categorical-heavy data, keep LightGBM for large mostly-numeric data or when training speed matters.
